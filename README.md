@@ -1,5 +1,4 @@
-# MultI-Smart
-A multi Utility Web App
+
 
 Type the command in the console
 
