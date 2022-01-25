@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/stonepaperscissors.css">
+  
+</head>
+<body>
+  <div class="selections">
+    <button class="selection" data-selection="rock">✊</button>
+    <button class="selection" data-selection="paper">✋</button>
+    <button class="selection" data-selection="scissors">✌</button>
+  </div>
+  <div class="results">
+    <div>
+      You
+      <span class="result-score" data-your-score>0</span>
+    </div>
+    <div data-final-column>
+      Computer
+      <span class="result-score" data-computer-score>0</span>
+    </div>
+    <!-- <div class="result-selection winner">✊</div>
+    <div class="result-selection">✌</div> -->
+  </div>
+
+  <script>
+
+    const selectionButtons = document.querySelectorAll('[data-selection]')
+    const finalColumn = document.querySelector('[data-final-column]')
+    const computerScoreSpan = document.querySelector('[data-computer-score]')
+    const yourScoreSpan = document.querySelector('[data-your-score]')
+    const SELECTIONS = [
+      {
+        name: 'rock',
+        emoji: '✊',
+        beats: 'scissors'
+      },
+      {
+        name: 'paper',
+        emoji: '✋',
+        beats: 'rock'
+      },
+      {
+        name: 'scissors',
+        emoji: '✌',
+        beats: 'paper'
+      }
+    ]
+    
+    selectionButtons.forEach(selectionButton => {
+      selectionButton.addEventListener('click', e => {
+        const selectionName = selectionButton.dataset.selection
+        const selection = SELECTIONS.find(selection => selection.name === selectionName)
+        makeSelection(selection)
+      })
+    })
+    
+    function makeSelection(selection) {
+      const computerSelection = randomSelection()
+      const yourWinner = isWinner(selection, computerSelection)
+      const computerWinner = isWinner(computerSelection, selection)
+    
+      addSelectionResult(computerSelection, computerWinner)
+      addSelectionResult(selection, yourWinner)
+    
+      if (yourWinner) incrementScore(yourScoreSpan)
+      if (computerWinner) incrementScore(computerScoreSpan)
+    }
+    
+    function incrementScore(scoreSpan) {
+      scoreSpan.innerText = parseInt(scoreSpan.innerText) + 1
+    }
+    
+    function addSelectionResult(selection, winner) {
+      const div = document.createElement('div')
+      div.innerText = selection.emoji
+      div.classList.add('result-selection')
+      if (winner) div.classList.add('winner')
+      finalColumn.after(div)
+    }
+    
+    function isWinner(selection, opponentSelection) {
+      return selection.beats === opponentSelection.name
+    }
+    
+    function randomSelection() {
+      const randomIndex = Math.floor(Math.random() * SELECTIONS.length)
+      return SELECTIONS[randomIndex]
+    }
+      </script>
+</body>
+</html>

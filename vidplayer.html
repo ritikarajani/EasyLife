@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/vidplayer.css" />
+    <title>Video Player</title>
+  </head>
+  <body>
+    <h1 style="color:black;background-color: white;"><img style="height:70px;width:50px;" src="https://cdn.cnn.com/cnnnext/dam/assets/180629134020-netflix-domination-thumb-exlarge-169.jpg"/>Video Player</h1>
+
+    <div class="video-container" id="video-container">
+      <div class="video-info">
+        <h4 id="title"></h4>
+        <div class="progress-container" id="progress-container">
+          <div class="progress" id="progress"></div>
+        </div>
+      </div>
+
+      <video style="height:300px;width:400px;" src="vids/vid1.mp4" id="video"></video>
+
+      <div class="img-container">
+        <video style="height:200px;width:200px;" src="vids/vid1.mp4" alt="video-cover" id="cover" />
+      </div>
+      <div class="navigation">
+        <button id="prev" class="action-btn">
+          Previous<!--<i class="fas fa-backward"></i>-->
+        </button>
+        <button id="play" class="action-btn action-btn-big">
+         <i class="fas fa-play"></i>
+        </button>
+        <button id="next" class="action-btn">
+         Next<!---<i class="fas fa-forward"></i>-->
+        </button>
+      </div>
+    </div>
+
+    <script>
+
+const videoContainer = document.getElementById('video-container');
+const playBtn = document.getElementById('play');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+
+const video = document.getElementById('video');
+const progress = document.getElementById('progress');
+const progressContainer = document.getElementById('progress-container');
+const title = document.getElementById('title');
+const cover = document.getElementById('cover');
+
+// Video titles
+const vids = ['vid1', 
+               'vid2', 
+               'vid3'];
+
+// Keep track of video
+let vidIndex = 1;
+
+// Initially load video details into DOM
+loadVideo(vids[vidIndex]);
+
+// Update video details
+function loadVideo(vide) {
+  title.innerText = vide;
+  video.src = `vids/${vide}.mp4`;
+  cover.src = `vids/${vide}.jpg`;
+}
+
+// Play video
+function playVideo() {
+  videoContainer.classList.add('play');
+  playBtn.querySelector('i.fas').classList.remove('fa-play');
+  playBtn.querySelector('i.fas').classList.add('fa-pause');
+
+  video.play();
+}
+
+// Pause video
+function pauseVideo() {
+  videoContainer.classList.remove('play');
+  playBtn.querySelector('i.fas').classList.add('fa-play');
+  playBtn.querySelector('i.fas').classList.remove('fa-pause');
+
+  video.pause();
+}
+
+// Previous video
+function prevVideo() {
+  vidIndex--;
+
+  if (vidIndex < 0) {
+    vidIndex = vids.length - 1;
+  }
+
+  loadVideo(vids[vidIndex]);
+
+  playVideo();
+}
+
+// Next video
+function nextVideo() {
+  vidIndex++;
+
+  if (vidIndex > vids.length - 1) {
+    vidIndex = 0;
+  }
+
+  loadVideo(vids[vidIndex]);
+
+  playVideo();
+}
+
+// Update progress bar
+function updateProgress(e) {
+  const { duration, currentTime } = e.srcElement;
+  const progressPercent = (currentTime / duration) * 100;
+  progress.style.width = `${progressPercent}%`;
+}
+
+// Set progress bar
+function setProgress(e) {
+  const width = this.clientWidth;
+  const clickX = e.offsetX;
+  const duration = video.duration;
+
+  video.currentTime = (clickX / width) * duration;
+}
+
+// Event listeners
+playBtn.addEventListener('click', () => {
+  const isPlaying = videoContainer.classList.contains('play');
+
+  if (isPlaying) {
+    pauseVideo();
+  } else {
+    playVideo();
+  }
+});
+
+// Change video
+prevBtn.addEventListener('click', prevVideo);
+nextBtn.addEventListener('click', nextVideo);
+
+// Time/video update
+video.addEventListener('timeupdate', updateProgress);
+
+// Click on progress bar
+progressContainer.addEventListener('click', setProgress);
+
+// video ends
+video.addEventListener('ended', nextVideo);
+    </script>
+  </body>
+</html>

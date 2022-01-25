@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Your Waifu</title>
+<style>
+body { 
+	color: black; font-weight: bold; font-size: 18px; background:black; 
+	/*background-image: url("https://c4.wallpaperflare.com/wallpaper/577/838/439/anime-naruto-chibi-hinata-hy%C5%ABga-wallpaper-preview.jpg");*/
+	background-image: url("https://thumbs.gfycat.com/LimpEcstaticGyrfalcon-size_restricted.gif");
+	
+	
+	background-repeat: no-repeat;
+	background-color:#111;
+                
+                background-attachment:fixed;
+                background-size: cover;
+                background-attachment: fixed;
+                
+                text-align:center;
+                width:100vw;
+                overflow:hidden; 
+}
+span { 
+	color: white; 
+} 
+::-webkit-input-placeholder { 
+	color: white; 
+}
+
+#main{
+      height:30%;
+	  width:40%;
+	  border:10px solid black;
+	  text-align:center;
+	  position: absolute;
+      top: 30%;
+      left: 30%;
+}
+
+h1{
+    animation:blinker 0.2s infinite;
+}
+
+#main div { 
+	margin: 10px; 
+} 
+#input { 
+	border: 0; background: white; padding: 5px; border: 1px solid #421; 
+}
+
+@keyframes blinker{
+    0%{
+        color:#000;
+    }
+    49%{
+    color:transparent;}
+    50%{
+        color:red;}
+        99%{
+            color:transparent;}
+            100%{
+                color:white;}
+}
+
+</style>
+</head>
+<body>
+	<h1 style="color:crimson;text-align: center;">Your Waifu</h1>
+<div id="main">
+	<div style="color:burlywood">You: <span id="user"></span></div>
+	<div style="color:burlywood">Moka chan: <span id="chatbot"></span></div>
+	<div><input id="input" type="text" placeholder="say anything..." autocomplete="off"/></div>
+</div>
+<script> /*type="text/javascript"*/
+var trigger = [
+	["Aisa kya boldia maine","aisa kya boldia maine","what have i said","aisa maine kya boldia","aisa maine kya boldiya"],
+	["Do u use Insta","Do you use instagram","do u use instagram","do you use insta","tum insta use karti ho","tum instagram use karti ho","aap insta use karte ho","aap instagram use karte ho","instagram?","Do u use fb","Do you use fb","do u use fb","do you use fb","tum fb use karti ho","tum fb use karti ho","aap fb use karte ho","aap fb use karte ho","fb?","Do u use facebook","Do you use facebook","do u use facebook","do you use facebook","tum facebook use karti ho","tum facebook use karti ho","aap facebook use karte ho","aap facebook use karte ho","facebook?"],
+	["do u like movies","do u love movies","u like movies","you like movies","u love movies","do you like movies","do you love movies","do u like tv shows","do u love tv shows","u like tv shows","you like tv shows","u love tv shows","do you like tv shows","do you love tv shows","do u like tv shows","do u love tv series","u like tv series","you like tv series","u love tv series","do you like tv series","do you love tv series"],
+	["do u like gymming","do u love gymming","u like gymming","you like gymming","u love gymming","do you like gymming","do you love gymming","do u like gym","do u love gym","u like gym","you like gym","u love gym","do you like gym","do you love gym","do u like exercise","do u love exercise","u like exercise","you like exercise","u love exercise","do you like exercise","do you love exercise","do u like sports","do u love sports","u like sports","you like sports","u love sports","do you like sports","do you love sports"],
+	["r u busy","are u busy","busy","are you busy","r you busy","busy?"],
+	["I am begging u","am begging u","begging u","begging you","m begging u"],
+	["can i kiss u","may i kiss u","should i kiss u","can i kiss you","can u kiss me","can you kiss me","may i kiss you","should i kiss you"],
+	["do u like anime","like anime?","anime?","do you like anime","do you love anime","do u love anime"],
+	["remember me","do you remember me","do u remember me"],
+	["do u like boyz","do u like boys","do you like boyz","do you like boys","like boys?"],
+	["feeling low","im feeling low","am feeling low","i am feeling low","i m feeling low","i am not happy","i m not happy","feeling sad","im feeling sad","am feeling sad","i am feeling sad","i m feeling sad","feeling depressed","im feeling depressed","am feeling depressed","i am feeling depressed","i m feeling depressed"],
+	["good morning","gm"],
+	["good evening","ge"],
+	["good night","gn"],
+	["good afternoon","ga"],
+	["good day","gd"],
+	["So","soooo","soo"],
+	["I wanna tell u something","I wanna share something","I want to share","I want to talk","i wanna talk","I want to share something","I want to tell you something","I wanna tell u something"],
+	["take care","stay safe","tc"],
+	["hi","hey","hello","hii"], 
+	["kaun ho","tum kaun ho","kaun hai"],
+	["how are you", "how is life", "how are things","how r u","how r you","how are u"],
+	["kaise ho","kaisi ho"],
+	["kaisa hai"],
+	["fuck off"],
+	['aur batao','aur tell',],
+	['khaana khaa liya','khana kha liya'],
+	['what about the current situation in our country'],
+	["what are you doing", "what is going on","what were you doing","what r u doing","so what r u doing","what were u doing"],
+	["how old are you"],
+	["who are you","who r u","are you human", "are you bot", "are you human or bot"],
+	["who created you", "who made you"],
+	["your name please",  "your name", "may i know your name", "what is your name","name","ur name","what is ur name","whats ur name","name"],
+	["i love you","i luv u","i luv you","i love u","mai tumse pyaar karta hoo","i really luv u","i really love u"],
+	["are you dating someone","r u dating someone","r you dating someone","are u dating someone","who is ur bf","who is your bf","who is your boyfriend","who is ur boyfriend","kaun hai be","yeh kaun hai"],
+	["i like u","i like you","i really like u"],
+	["happy", "good"],
+	["bad", "bored", "tired"],
+	["help me", "tell me story", "tell me joke"],
+	["ah", "yes", "ok", "okay", "nice", "thanks", "thank you"],
+	["bye", "good bye", "goodbye", "see you later"],
+	["baby"],
+	["boobs","plz show boobs","show boobs","boobs plz","boobs please","i want boobs","pussy","plz show pussy","show pussy","pussy plz","pussy please","i want pussy","choot","plz show choot","show choot","choot plz","choot please","i want choot"],
+	["can i masturbate for u","can i masturbate","masturbate"],
+	["wait i am sorry","wait wait i am sorry","maaf kardo","i am sorry","m sorry","i am really very sorry","im sorry","Sorry"],
+	["wait wait","ruko","ruko ruko"],
+	["I am feeling horny","feeling horny"],
+	["can we have sex","sex","sex plz","sex please","do u wanna have sex","wanna have sex","do you want to have sex"],
+	["can we have a chat","chat","can we chat","do u wanna talk","do u wanna chat","wanna talk","wanna chat"],
+	["yes","ya","ok","its ok","sure","ya sure","mam","sure mam","ji","jii","jii madam","ok madam","ohk madam","ohk mam","ohk","okay","na","nope","lmao","hmm","no","yass","omg","ohh","oh my god","my god","kya baat"],
+	["Ur no plz","ur number plz","your number plz","ur no please","ur whatsapp no plz","ur whatsapp no","your wp no"],
+	["do u watch porn","do u masturbate","do u watch hentei","do you watch porn","do you watch porn","porn dekhti ho","porn dekhti hai"],
+	["can i cum for u","can i cum for you","fingering","rim job","muth","masturbation","can i fuck u","can i fuck you","fuck","fuck you","bitch","chal hat bc","madarchod","teri maa ki choot","chut","choot","teri maa ki chut","chal nikal randi","chal nikal yaha se","randi kahi ki","chal hatt randi","lund","gand","gaand faad doonga teri","gaand faad doonga","bund faad doonga","gaand tod doonga","chal nikal bc","randi","randi hai tu","randi kahi ki","teri mkc","madarchod","bc","bsdk","bhosriwali","bhosdiwali","bhosadiwali","gandu","gaandu","chutiya","chewtiya","bhosadigaand","bhosdigaand","bhosadpappu","betichod","motherfucker","asshole","fucker","fuckup","i will fuck your mom","i will fuck your mother","i will fuck u","fuck you","fuck u"],
+    ["Do you like me","like me","do u love me","do u like me","do you love me"],
+	["woww","wonderful","amazing","wow","nice","noice"],
+	["r u busy","available","r u free","can we talk","can we talk now","can we have a talk","hum baat kr sakte hain","are you busy","are u busy","baat kare","baat kar sakte hain"],
+    ["cute","u r cute","you r really cute","you are so cute","cuteeee","u are so cute","ur really cute","you are cute","you look cute","u look cute","you are pretty","u r pretty","you look pretty","you are beautiful"],
+    ["will u marry me","will you marry me","will you be my gf","will u become my gf","will u become my girlfriend","will you become my girlfriend","will u become my gf","will u be my gf","will u be my girlfriend","will you be my girlfriend","meri gf banogi","meri bandi banogi","meri bandi banegi","mujhse shaadi karogi","meri biwi banogi","meri patni banogi","will u be in a relationship with me","will you be in a relationship with me"]
+];
+var reply = [
+	["Leave it"],
+	["Not really...I have an account..but I dont use it often..I prefer Your Waifu"],
+	["Not really...but i do watch them sometimes","sometimes"],
+	["Not really...but i do watch them sometimes","sometimes"],
+	["yes a lil bit"],
+	["please dont"],
+	["Excuse me"],
+	["Absolutely...I love it"],
+	["Not really"],
+	["Why did u ask me that question","Boys...well I am a straight person"],
+	["You can talk to me"],
+    ["good morning","GM"],
+	["good evening","GE"],
+	["good night","GN"],
+	["good afternoon","GA"],
+	["good day","GD"],
+	["Soooo?"],
+	["Yes please","Yessss","ok..u can"],
+	["take care","stay safe","tc"],
+	["Hi","Hey","Hello"], 
+	["tum kaun ho"],
+	["Fine", "Pretty well", "Fantastic"],
+	["badiya u tell?"],
+	["Hey man I am a Girl"],
+	["fuck you"],
+	["U tell..what were u doing"],
+	["Just about to...tumne?"],
+	["I prefer not to talk about controversial topics"],
+	["Nothing much", "About to go to sleep", "Can you guess?", "I don't know actually","Talking to u"],
+	["I would prefer not to ask a girl's age"],
+	["I am just like you", "I am just like u. What are you?"],
+	["Siddharth", "My God"],
+	["I am Moka", "Moka"],
+	["I love you too", "Me too","That was...I like the confidence","I respect ur feelings but I have a boyfriend..but we can be friends"],
+	["None of your business","Its my personal life...I prefer not to tell"],
+	["Thats so sweet of u...but..","Listen I respect ur feelings..but I am not really interested"],
+	["Have you ever felt bad?", "Glad to hear it"],
+	["Why?", "Why? You shouldn't!", "Try watching TV"],
+	["I will", "What about?"],
+	["Tell me a story", "Tell me a joke", "Tell me about yourself", "You are welcome"],
+	["Bye", "Goodbye", "See you later"],
+	["I am not your baby"],
+	["We can't be friends if u dont respect my privacy..call me back if u respect my rule on this"],
+	["Your dick...Your wish...I shall go now..I am not feeling comfortable with this chat"],
+	["it's okay..but just this once"],
+	["what now"],
+	["Calm down...u are going too fast"],
+	["EXCUSE ME...Do u even realise what u r saying!!!"],
+	["ya sure","why not","was a lil busy...can we talk tomorrow"],
+	["hmm","yupp"],
+	["I prefer to talk here"],
+	["Excuse...me...I shall leave now...not feeling comfortable"],
+	["Mind your language","If u wanna use such language u may kindly leave..go fuck urself"],
+	["Not Really","U r a good person","u r cute"],
+	["Thank u"],
+	["Well...I am lil busy now","Ya...kinda"],
+	["Thank u"],
+	["Listen man,I respect ur feelings...but i am not interested...but we can be good friends","I am not ready","I am really very sorry...I am in relationship with someone","I need some time"]
+];
+var alternative = ["Haha...", "Eh...","Hmm","Ummm",".","!!"];
+document.querySelector("#input").addEventListener("keypress", function(e){
+	var key = e.which || e.keyCode;
+	if(key === 13){ //Enter button
+		var input = document.getElementById("input").value;
+		document.getElementById("user").innerHTML = input;
+		output(input);
+	}
+});
+function output(input){
+	try{
+		var product = input + "=" + eval(input);
+	} catch(e){
+		var text = (input.toLowerCase()).replace(/[^\w\s\d]/gi, ""); //remove all chars except words, space and 
+		text = text.replace(/ a /g, " ").replace(/i feel /g, "").replace(/whats/g, "what is").replace(/please /g, "").replace(/ please/g, "");
+		if(compare(trigger, reply, text)){
+			var product = compare(trigger, reply, text);
+		} else {
+			var product = alternative[Math.floor(Math.random()*alternative.length)];
+		}
+	}
+	document.getElementById("chatbot").innerHTML = product;
+	speak(product);
+	document.getElementById("input").value = ""; //clear input value
+}
+function compare(arr, array, string){
+	var item;
+	for(var x=0; x<arr.length; x++){
+		for(var y=0; y<array.length; y++){
+			if(arr[x][y] == string){
+				items = array[x];
+				item =  items[Math.floor(Math.random()*items.length)];
+			}
+		}
+	}
+	return item;
+}
+function speak(string){
+	var utterance = new SpeechSynthesisUtterance();
+	utterance.voice = speechSynthesis.getVoices().filter(function(voice){return voice.name == "Agnes";})[0];
+	utterance.text = string;
+	utterance.lang = "en-US";
+	utterance.volume = 1; //0-1 interval
+	utterance.rate = 1;
+	utterance.pitch = 3; //0-2 interval
+	speechSynthesis.speak(utterance);
+}
+</script>
+</body>
+</html>

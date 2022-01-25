@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PAINT APP</title>
+        <link rel="stylesheet" type="text/css" href="/css/paint.css">
+    </head>
+
+    <body>
+        <section>
+            <div id="drawingtools">
+                <div id="colors">
+                    <button id="black" onclick="changeColor('black')"></button>
+                    <button id="white" onclick="changeColor('white')"></button>
+                    <button id="red" onclick="changeColor('red')"></button>
+                    <button id="green" onclick="changeColor('green')"></button>
+                    <button id="blue" onclick="changeColor('blue')"></button>
+                    <button id="yellow" onclick="changeColor('yellow')"></button>
+                    <button id="purple" onclick="changeColor('purple')"></button>
+                    <button id="orange" onclick="changeColor('orange')"></button>
+                    <button id="grey" onclick="changeColor('grey')"></button>
+                    <button id="pink" onclick="changeColor('pink')"></button>
+                </div>
+
+                <div id="othertools">
+                    <button id="clearcanvas" onlick="clearCanvas()">C</button>
+                </div>
+            </div>
+
+            
+            <canvas id="canvas" width="800" height="500"></canvas>
+        </section>
+
+        <script>
+            var canvas=document.getElementById('canvas');
+var context=canvas.getContext('2d');
+context.lineWidth=5;
+var down=false;
+
+canvas.addEventListener('mousemove',draw);
+
+canvas.addEventListener('mouseup',function(){
+    down=false;
+});
+
+function draw(e){
+    xPos=e.clientX-canvas.offsetLeft;
+    yPos=e.clientY-canvas.offsetTop;
+
+    if(down==true){
+        context.lineTo(xPos,yPos);
+        context.stroke();
+    }
+}
+
+canvas.addEventListener('mousedown',function(){
+       down=true;
+       context.beginPath();
+       context.moveTo(xPOS,yPos);
+       canvas.addEventListener("mousemove",draw);
+});
+
+function changeColor(color){context.strokeStyle=color;}
+function clearCanvas(){context.clearRect(0,0,canvas.width,canvas.height);}
+        
+        </script>
+    </body>
+</html>
+
+//Application similar to MS Paint

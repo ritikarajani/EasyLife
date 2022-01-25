@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="css/voicechanger.css" />
+    <title>Speech Text Reader</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Speech Text Reader</h1>
+      <button id="toggle" class="btn btn-toggle">
+        Toggle Text Box
+      </button>
+      <div id="text-box" class="text-box">
+        <div id="close" class="close">X</div>
+        <h3>Choose Voice</h3>
+        <select id="voices"></select>
+        <textarea id="text" placeholder="Enter text to read..."></textarea>
+        <button class="btn" id="read">Read Text</button>
+      </div>
+      <main></main>
+    </div>
+
+    <script>
+
+const main = document.querySelector('main');
+const voicesSelect = document.getElementById('voices');
+const textarea = document.getElementById('text');
+const readBtn = document.getElementById('read');
+const toggleBtn = document.getElementById('toggle');
+const closeBtn = document.getElementById('close');
+
+const data = [
+  {
+    image: './img/drink.jpg',
+    text: "I'm Thirsty"
+  },
+  {
+    image: './img/food.jpg',
+    text: "I'm Hungry"
+  },
+  {
+    image: './img/tired.jpg',
+    text: "I'm Tired"
+  },
+  {
+    image: './img/hurt.jpg',
+    text: "I'm Hurt"
+  },
+  {
+    image: './img/happy.jpg',
+    text: "I'm Happy"
+  },
+  {
+    image: './img/angry.jpg',
+    text: "I'm Angry"
+  },
+  {
+    image: './img/sad.jpg',
+    text: "I'm Sad"
+  },
+  {
+    image: './img/scared.jpg',
+    text: "I'm Scared"
+  },
+  {
+    image: './img/outside.jpg',
+    text: 'I Want To Go Outside'
+  },
+  {
+    image: './img/home.jpg',
+    text: 'I Want To Go Home'
+  },
+  {
+    image: './img/school.jpg',
+    text: 'I Want To Go To School'
+  },
+  {
+    image: './img/grandma.jpg',
+    text: 'I Want To Go To Grandmas'
+  }
+];
+
+data.forEach(createBox);
+
+// Create speech boxes
+function createBox(item) {
+  const box = document.createElement('div');
+
+  const { image, text } = item;
+
+  box.classList.add('box');
+
+  box.innerHTML = `
+    <img src="${image}" alt="${text}" />
+    <p class="info">${text}</p>
+  `;
+
+  box.addEventListener('click', () => {
+    setTextMessage(text);
+    speakText();
+
+    // Add active effect
+    box.classList.add('active');
+    setTimeout(() => box.classList.remove('active'), 800);
+  });
+
+  main.appendChild(box);
+}
+
+// Init speech synth
+const message = new SpeechSynthesisUtterance();
+
+// Store voices
+let voices = [];
+
+function getVoices() {
+  voices = speechSynthesis.getVoices();
+
+  voices.forEach(voice => {
+    const option = document.createElement('option');
+
+    option.value = voice.name;
+    option.innerText = `${voice.name} ${voice.lang}`;
+
+    voicesSelect.appendChild(option);
+  });
+}
+
+// Set text
+function setTextMessage(text) {
+  message.text = text;
+}
+
+// Speak text
+function speakText() {
+  speechSynthesis.speak(message);
+}
+
+// Set voice
+function setVoice(e) {
+  message.voice = voices.find(voice => voice.name === e.target.value);
+}
+
+// Voices changed
+speechSynthesis.addEventListener('voiceschanged', getVoices);
+
+// Toggle text box
+toggleBtn.addEventListener('click', () =>
+  document.getElementById('text-box').classList.toggle('show')
+);
+
+// Close button
+closeBtn.addEventListener('click', () =>
+  document.getElementById('text-box').classList.remove('show')
+);
+
+// Change voice
+voicesSelect.addEventListener('change', setVoice);
+
+// Read text button
+readBtn.addEventListener('click', () => {
+  setTextMessage(textarea.value);
+  speakText();
+});
+
+getVoices();
+    </script>
+  </body>
+</html>
